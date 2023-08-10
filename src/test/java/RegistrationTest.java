@@ -81,6 +81,7 @@ public class RegistrationTest extends BaseTest {
     public void ValidTeacherSignUp(){
         LandingPage page = new LandingPage(driver);
         String LandingURL = page.getURL();
+        String email = "bmw3@gmail.com";
         page.clickOnSignUpButton();
         RegistrationPage registration = new RegistrationPage(driver);
 
@@ -90,7 +91,7 @@ public class RegistrationTest extends BaseTest {
         assertTrue(TeacherOptional.isPresent());
         TeacherOptional.get().click();
         registration.enterTextToElement("Popovics Andrey", registration.getFullNameField());
-        registration.enterTextToElement("bmw3@gmail.com", registration.getEmailField());
+        registration.enterTextToElement(email, registration.getEmailField());
         registration.enterTextToElement("123456", registration.getPasswordField());
         registration.clickCheckBoxAgree();
         registration.clickOnSignUpButton();
@@ -99,6 +100,8 @@ public class RegistrationTest extends BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.MuiButtonBase-root:first-of-type")));
 
         assertEquals(LandingURL, registration.getURL());
+        Requests requests = new Requests();
+        requests.deleteRequest("/users/"+email, 200);
     }
 
     @Test
@@ -107,6 +110,7 @@ public class RegistrationTest extends BaseTest {
     public void ValidStudentSignUp(){
         LandingPage page = new LandingPage(driver);
         String LandingURL = page.getURL();
+        String email = "bmw5@gmail.com";
         page.clickOnSignUpButton();
         RegistrationPage registration = new RegistrationPage(driver);
 
@@ -116,7 +120,7 @@ public class RegistrationTest extends BaseTest {
         assertTrue(TeacherOptional.isPresent());
         TeacherOptional.get().click();
         registration.enterTextToElement("Popovics Adam", registration.getFullNameField());
-        registration.enterTextToElement("bmw5@gmail.com", registration.getEmailField());
+        registration.enterTextToElement(email, registration.getEmailField());
         registration.enterTextToElement("123456", registration.getPasswordField());
         registration.clickCheckBoxAgree();
         registration.clickOnSignUpButton();
@@ -125,6 +129,8 @@ public class RegistrationTest extends BaseTest {
         wait.until(ExpectedConditions.elementToBeClickable(By.cssSelector("button.MuiButtonBase-root:first-of-type")));
 
         assertEquals(LandingURL, registration.getURL());
+        Requests requests = new Requests();
+        requests.deleteRequest("/users/"+email, 200);
     }
 
     @Test
